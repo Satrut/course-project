@@ -43,7 +43,7 @@ type TCourse struct {
 	CourseID  string `gorm:"primary_key"`
 	Name      string
 	Cap       int
-	TeacherID string `gorm:"default:;"`
+	TeacherID string
 }
 
 // -----------------------------------
