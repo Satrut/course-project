@@ -1,7 +1,7 @@
 package Initdb
 
 import (
-	"course-project/type"
+	"course-project/types"
 	"fmt"
 	"github.com/jinzhu/gorm"
 )
@@ -30,8 +30,8 @@ func InitDB() *gorm.DB {
 	}
 
 	//自动创建数据表
-	DB.AutoMigrate(&_type.TMember{})
-	DB.AutoMigrate(&_type.TCourse{})
+	DB.AutoMigrate(&types.TMember{})
+	DB.AutoMigrate(&types.TCourse{})
 
 	return DB
 }

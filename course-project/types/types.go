@@ -1,4 +1,4 @@
-package _type
+package types
 
 // 说明：
 // 1. 所提到的「位数」均以字节长度为准

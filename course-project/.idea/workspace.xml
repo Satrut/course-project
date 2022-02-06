@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq 又把type拼接了回来">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq 修改GetCourse">
+      <change beforePath="$PROJECT_DIR$/Initdb/InitDB.go" beforeDir="false" afterPath="$PROJECT_DIR$/Initdb/InitDB.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" beforeDir="false" afterPath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/type/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/type/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/types.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,20 +119,10 @@
     <MESSAGE value="dq修改type" />
     <MESSAGE value="dq拆分type" />
     <MESSAGE value="dq 又把type拼接了回来" />
-    <option name="LAST_COMMIT_MESSAGE" value="dq 又把type拼接了回来" />
+    <MESSAGE value="dq 修改GetCourse" />
+    <option name="LAST_COMMIT_MESSAGE" value="dq 修改GetCourse" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/course_arrangement/course_arrangement.go</url>
-          <line>24</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
