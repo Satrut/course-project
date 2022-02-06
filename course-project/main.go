@@ -2,9 +2,7 @@ package main
 
 import (
 	"course-project/Initdb"
-	_ "course-project/Initdb"
-	"course-project/course_arrangement"
-	_ "course-project/course_arrangement"
+	"course-project/types_1"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -20,10 +18,7 @@ func main() {
 	defer db.Close() //延时关闭
 
 	r := gin.Default()
-
-	r.Handle("POST", "/course/create", course_arrangement.CreateCourse)
-	r.Handle("POST", "/course/get", course_arrangement.GetCourse)
-	r.Handle("GET", "/ping", sayHello)
+	types_1.RegisterRouter(r)
 
 	//r.Run()
 	panic(r.Run()) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

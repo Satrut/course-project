@@ -1,6 +1,10 @@
-package types
+package types_1
 
-import "github.com/gin-gonic/gin"
+import (
+	"course-project/course_arrangement"
+	_ "course-project/course_arrangement"
+	"github.com/gin-gonic/gin"
+)
 
 func RegisterRouter(r *gin.Engine) {
 	g := r.Group("/api/v1")
@@ -19,8 +23,8 @@ func RegisterRouter(r *gin.Engine) {
 	g.GET("/auth/whoami")
 
 	// 排课
-	g.POST("/course/create")
-	g.GET("/course/get")
+	g.POST("/course/create", course_arrangement.CreateCourse)
+	g.GET("/course/get", course_arrangement.GetCourse)
 
 	g.POST("/teacher/bind_course")
 	g.POST("/teacher/unbind_course")
