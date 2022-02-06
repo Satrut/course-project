@@ -23,7 +23,8 @@ func CreateCourse(c *gin.Context) {
 func GetCourse(c *gin.Context) {
 	request := _type.GetCourseRequest{}
 	c.BindJSON(&request)
-	tcourse := _type.TCourse{CourseID: request.CourseID}
+	tcourse := _type.TCourse{}
+	tcourse.CourseID = c.Query("CourseID")
 	db := Initdb.InitDB()
 	if result := db.First(&tcourse); result.Error != nil {
 		response := _type.GetCourseResponse{
