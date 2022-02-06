@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq修改type">
+    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq拆分type">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Initdb/InitDB.go" beforeDir="false" afterPath="$PROJECT_DIR$/Initdb/InitDB.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" beforeDir="false" afterPath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/types_1/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/types_2/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types_1/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/type/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types_2/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/type/types.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +61,7 @@
       <recent name="D:\1 coding\Go\course-system\course-project\types" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\1 coding\Go\course-system\course-project\type" />
       <recent name="D:\1 coding\Go\course-system\course-project\types_2" />
       <recent name="D:\1 coding\Go\course-system\course-project\types_1" />
       <recent name="D:\1 coding\Go\course-system\course-project" />
@@ -118,7 +119,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dq修改type" />
-    <option name="LAST_COMMIT_MESSAGE" value="dq修改type" />
+    <MESSAGE value="dq拆分type" />
+    <option name="LAST_COMMIT_MESSAGE" value="dq拆分type" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
