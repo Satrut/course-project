@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq 修改GetCourse">
-      <change beforePath="$PROJECT_DIR$/Initdb/InitDB.go" beforeDir="false" afterPath="$PROJECT_DIR$/Initdb/InitDB.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" beforeDir="false" afterPath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/type/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/type/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,5 +123,12 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="tcourse" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

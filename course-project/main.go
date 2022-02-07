@@ -37,9 +37,9 @@ func main() {
 	g.POST("/course/create", course_arrangement.CreateCourse)
 	g.GET("/course/get", course_arrangement.GetCourse)
 
-	g.POST("/teacher/bind_course")
-	g.POST("/teacher/unbind_course")
-	g.GET("/teacher/get_course")
+	g.POST("/teacher/bind_course", course_arrangement.BindCourse)
+	g.POST("/teacher/unbind_course", course_arrangement.UnbindCourse)
+	g.GET("/teacher/get_course", course_arrangement.GetTeacherCourse)
 	g.POST("/course/schedule")
 
 	// 抢课
