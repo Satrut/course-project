@@ -45,7 +45,7 @@ func main() {
 	// 抢课
 	g.POST("/student/book_course")
 	g.GET("/student/course")
-	
+
 	//r.Run()
 	panic(r.Run()) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
