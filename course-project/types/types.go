@@ -38,6 +38,7 @@ type TMember struct {
 	Username   string
 	UserType   UserType
 	UserStatus bool
+	Password   string
 }
 
 type TCourse struct {

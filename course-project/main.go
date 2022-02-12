@@ -3,6 +3,8 @@ package main
 import (
 	"course-project/Initdb"
 	"course-project/course_arrangement"
+	"course-project/login"
+	"course-project/member"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -21,31 +23,31 @@ func main() {
 	g := r.Group("/api/v1")
 
 	// 成员管理
-	g.POST("/member/create")
+	g.POST("/member/create", member.CreateMember)
 	g.GET("/member")
 	g.GET("/member/list")
-	g.POST("/member/update")
+	g.POST("/member/update", member.UpdateMember)
 	g.POST("/member/delete")
 
 	// 登录
 
-	g.POST("/auth/login")
-	g.POST("/auth/logout")
-	g.GET("/auth/whoami")
+	g.POST("/auth/login", login.Login)
+	g.POST("/auth/logout", login.Logout)
+	g.GET("/auth/whoami", login.WhoAmI)
 
 	// 排课
 	g.POST("/course/create", course_arrangement.CreateCourse)
 	g.GET("/course/get", course_arrangement.GetCourse)
 
-	g.POST("/teacher/bind_course", course_arrangement.BindCourse)
-	g.POST("/teacher/unbind_course", course_arrangement.UnbindCourse)
-	g.GET("/teacher/get_course", course_arrangement.GetTeacherCourse)
+	g.POST("/teacher/bind_course")
+	g.POST("/teacher/unbind_course")
+	g.GET("/teacher/get_course")
 	g.POST("/course/schedule")
 
 	// 抢课
 	g.POST("/student/book_course")
 	g.GET("/student/course")
-	
+
 	//r.Run()
 	panic(r.Run()) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
