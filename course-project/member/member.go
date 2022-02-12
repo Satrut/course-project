@@ -49,20 +49,20 @@ func GetMemberList(c *gin.Context) {
 	if result := db.Find(&tmemberlist, "UserStatus=?", true); result.Error != nil {
 		response := types.GetMemberListResponse{
 			Code: types.UserNotExisted,
-			//Data: {
-			//	MemberList: tmemberlist,
-			//},
+			Data: struct{ MemberList []types.TMember }{
+				MemberList: tmemberlist,
+			},
 		}
-		response.Data.MemberList = tmemberlist
+		//response.Data.MemberList = tmemberlist
 		c.JSON(200, response)
 	} else {
 		response := types.GetMemberListResponse{
 			Code: types.OK,
-			//Data: {
-			//	MemberList: tmemberlist,
-			//},
+			Data: struct{ MemberList []types.TMember }{
+				MemberList: tmemberlist,
+			},
 		}
-		response.Data.MemberList = tmemberlist
+		//response.Data.MemberList = tmemberlist
 		c.JSON(200, response)
 	}
 }

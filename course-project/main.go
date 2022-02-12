@@ -3,6 +3,7 @@ package main
 import (
 	"course-project/Initdb"
 	"course-project/course_arrangement"
+	"course-project/member"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -22,10 +23,10 @@ func main() {
 
 	// 成员管理
 	g.POST("/member/create")
-	g.GET("/member")
-	g.GET("/member/list")
+	g.GET("/member", member.GetMember)
+	g.GET("/member/list", member.GetMemberList)
 	g.POST("/member/update")
-	g.POST("/member/delete")
+	g.POST("/member/delete", member.DeleteMember)
 
 	// 登录
 
