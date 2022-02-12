@@ -3,8 +3,10 @@ package main
 import (
 	"course-project/Initdb"
 	"course-project/course_arrangement"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"net/http"
 )
 
 func sayHello(c *gin.Context) {
@@ -46,6 +48,14 @@ func main() {
 	g.POST("/student/book_course")
 	g.GET("/student/course")
 
+	g.GET("/hello", func(c *gin.Context) {
+		name := c.Query("name")
+		c.String(http.StatusOK, fmt.Sprintf("hello %s", name))
+	})
+	r.Handle("GET", "/say_hello", func(c *gin.Context) {
+		name := c.Query("name")
+		c.String(http.StatusOK, fmt.Sprintf("hello %s", name))
+	})
 	//r.Run()
 	panic(r.Run()) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

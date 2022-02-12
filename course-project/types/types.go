@@ -33,10 +33,11 @@ type ResponseMeta struct {
 }
 
 type TMember struct {
-	UserID   string `gorm:"primary_key"`
-	Nickname string
-	Username string
-	UserType UserType
+	UserID     string `gorm:"primary_key"`
+	Nickname   string
+	Username   string
+	UserType   UserType
+	UserStatus bool
 }
 
 type TCourse struct {
