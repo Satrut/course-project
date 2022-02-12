@@ -12,6 +12,8 @@ import (
 //g.POST("/member/update")
 //g.POST("/member/delete")
 
+// 获取成员信息，如果用户已删除请返回已删除状态码，不存在请返回不存在状态码
+
 func GetMember(c *gin.Context) {
 	tmember := types.TMember{}
 	tmember.UserID = c.Query("UserID")
@@ -38,6 +40,34 @@ func GetMember(c *gin.Context) {
 		}
 	}
 }
+
+// 批量获取成员信息
+
+func GetMemberList(c *gin.Context) {
+	tmemberlist := []types.TMember{}
+	db := Initdb.InitDB()
+	if result := db.Find(&tmemberlist, "UserStatus=?", true); result.Error != nil {
+		response := types.GetMemberListResponse{
+			Code: types.UserNotExisted,
+			Data: struct{ MemberList []types.TMember }{
+				MemberList: tmemberlist,
+			},
+		}
+		//response.Data.MemberList = tmemberlist
+		c.JSON(200, response)
+	} else {
+		response := types.GetMemberListResponse{
+			Code: types.OK,
+			Data: struct{ MemberList []types.TMember }{
+				MemberList: tmemberlist,
+			},
+		}
+		//response.Data.MemberList = tmemberlist
+		c.JSON(200, response)
+	}
+}
+
+//删除成员信息
 
 func DeleteMember(c *gin.Context) {
 	//request := types.DeleteMemberRequest{}
@@ -66,5 +96,4 @@ func DeleteMember(c *gin.Context) {
 			c.JSON(200, response)
 		}
 	}
-
 }
