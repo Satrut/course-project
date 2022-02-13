@@ -40,7 +40,7 @@ func main() {
 	g.POST("/teacher/bind_course", course_arrangement.BindCourse)
 	g.POST("/teacher/unbind_course", course_arrangement.UnbindCourse)
 	g.GET("/teacher/get_course", course_arrangement.GetTeacherCourse)
-	g.POST("/course/schedule")
+	g.POST("/course/schedule", course_arrangement.ScheduleCourse)
 
 	// 抢课
 	g.POST("/student/book_course")

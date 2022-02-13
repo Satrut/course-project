@@ -134,3 +134,56 @@ func GetTeacherCourse(c *gin.Context) {
 	}
 	c.JSON(200, response)
 }
+
+//排课求解器
+func ScheduleCourse(c *gin.Context) {
+	request := types.ScheduleCourseRequest{}
+	res := make(map[string]string)
+	if c.BindJSON(&request) != nil { //如果参数不合法
+		response := types.ScheduleCourseResponse{
+			Code: types.ParamInvalid,
+			Data: res,
+		}
+		c.JSON(200, response)
+		return
+	}
+	relationShip := request.TeacherCourseRelationShip
+	used := make(map[string]bool)
+	pre := make(map[string]string)
+	//遍历原始数据
+	for k, v := range relationShip { //不一定是插入顺序
+		res[k] = ""
+		for _, courseID := range v {
+			used[courseID] = false
+			pre[courseID] = ""
+		}
+	}
+	for teacherID, _ := range relationShip {
+		for courseID, _ := range used {
+			used[courseID] = false
+		}
+		dfs(relationShip, res, used, pre, teacherID)
+	}
+	response := types.ScheduleCourseResponse{
+		Code: types.OK,
+		Data: res,
+	}
+	c.JSON(200, response)
+}
+
+func dfs(relationShip map[string][]string, res map[string]string, used map[string]bool, pre map[string]string, teacherID string) bool {
+	courseList := relationShip[teacherID]
+	for _, courseID := range courseList {
+		if !used[courseID] {
+			used[courseID] = true
+			if pre[courseID] == "" || dfs(relationShip, res, used, pre, pre[courseID]) {
+				pre[courseID] = teacherID
+				res[teacherID] = courseID
+				return true
+			}
+		} else {
+			continue
+		}
+	}
+	return false
+}
