@@ -5,6 +5,7 @@ import (
 	"course-project/types"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 //g.POST("/member/create")
@@ -45,10 +46,13 @@ func GetMember(c *gin.Context) {
 // 批量获取成员信息
 
 func GetMemberList(c *gin.Context) {
+	request := types.GetMemberListRequest{}
+	request.Offset, _ = strconv.Atoi(c.Query("Offset"))
+	request.Limit, _ = strconv.Atoi(c.Query("Limit"))
 	tmemberlist := []types.TMember{}
 	db := Initdb.InitDB()
 	//if result := db.Find(&tmemberlist, "UserStatus=?", true); result.Error != nil {
-	if result := db.Find(&tmemberlist, "user_status=?", true); result.Error != nil {
+	if result := db.Offset(request.Offset).Limit(request.Limit).Find(&tmemberlist, "user_status=?", true); result.Error != nil {
 		response := types.GetMemberListResponse{
 			Code: types.UserNotExisted,
 			Data: struct{ MemberList []types.TMember }{
