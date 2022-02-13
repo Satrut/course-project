@@ -5,6 +5,7 @@ import (
 	"course-project/types"
 	"github.com/gin-gonic/gin"
 	"github.com/pborman/uuid"
+	"net/http"
 	"unicode"
 )
 
@@ -12,6 +13,30 @@ import (
 
 // CreateMember 添加成员
 func CreateMember(c *gin.Context) {
+	//登录状态及权限判断
+	campSession, err := c.Cookie("camp-session")
+	if err != nil {
+		//无cookie，需要登录
+		response := types.CreateMemberResponse{
+			Code: types.LoginRequired,
+			Data: struct{ UserID string }{UserID: ""},
+		}
+		c.JSON(http.StatusOK, response)
+		return
+	} else {
+		tmember := types.TMember{}
+		db := Initdb.InitDB()
+		db.Where("user_id = ?", campSession).Find(&tmember)
+		if tmember.UserType != 1 {
+			//无权限
+			response := types.CreateMemberResponse{
+				Code: types.PermDenied,
+				Data: struct{ UserID string }{UserID: tmember.UserID},
+			}
+			c.JSON(http.StatusOK, response)
+			return
+		}
+	}
 	// 判断参数是否合法
 	request := types.CreateMemberRequest{}
 	if c.BindJSON(&request) != nil || len(request.Nickname) < 4 || len(request.Nickname) > 20 || !JudgeUsername(request.Username) || !JudgePassWord(request.Password) {
@@ -25,9 +50,10 @@ func CreateMember(c *gin.Context) {
 
 	// 判断UserName是否存在
 	tmember := types.TMember{}
-	tmember.Username = c.Query("Username")
+	//tmember.Username = c.Query("Username")
+	tmember.Username = request.Username
 	db := Initdb.InitDB()
-	if result := db.First(&tmember); result.Error == nil {
+	if result := db.Where("username = ?", tmember.Username).Find(&tmember); result.Error == nil {
 		response := types.CreateMemberResponse{
 			Code: types.UserHasExisted,
 			Data: struct{ UserID string }{UserID: ""},
@@ -41,6 +67,8 @@ func CreateMember(c *gin.Context) {
 	tmember.Nickname = request.Nickname
 	tmember.Username = request.Username
 	tmember.UserType = request.UserType
+	tmember.Password = request.Password
+	tmember.UserStatus = true
 
 	db.Create(&tmember)
 	response := types.CreateMemberResponse{
@@ -97,9 +125,10 @@ func UpdateMember(c *gin.Context) {
 
 	// 判断UserID是否存在
 	tmember := types.TMember{}
-	tmember.Username = c.Query("UserID")
+	//tmember.UserID = c.Query("UserID")
+	tmember.UserID = request.UserID
 	db := Initdb.InitDB()
-	if result := db.First(&tmember); result.Error != nil {
+	if result := db.Where("user_id = ?", tmember.UserID).Find(&tmember); result.Error != nil {
 		response := types.UpdateMemberResponse{
 			Code: types.UserNotExisted,
 		}

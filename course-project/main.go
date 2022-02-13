@@ -3,6 +3,8 @@ package main
 import (
 	"course-project/Initdb"
 	"course-project/course_arrangement"
+	"course-project/login"
+	"course-project/member"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -15,23 +17,32 @@ func sayHello(c *gin.Context) {
 
 func main() {
 	db := Initdb.InitDB()
+	//tmember := types.TMember{
+	//	Nickname:   "admin",
+	//	Username:   "JudgeAdmin",
+	//	Password:   "JudgePassword2022",
+	//	UserType:   types.Admin,
+	//	UserStatus: true,
+	//	UserID:     uuid.NewRandom().String(),
+	//}
+	//db.Create(&tmember)
 	defer db.Close() //延时关闭
 
 	r := gin.Default()
 	g := r.Group("/api/v1")
 
 	// 成员管理
-	g.POST("/member/create")
-	g.GET("/member")
-	g.GET("/member/list")
-	g.POST("/member/update")
-	g.POST("/member/delete")
+	g.POST("/member/create", member.CreateMember)
+	g.GET("/member", member.GetMember)
+	g.GET("/member/list", member.GetMemberList)
+	g.POST("/member/update", member.UpdateMember)
+	g.POST("/member/delete", member.DeleteMember)
 
 	// 登录
 
-	g.POST("/auth/login")
-	g.POST("/auth/logout")
-	g.GET("/auth/whoami")
+	g.POST("/auth/login", login.Login)
+	g.POST("/auth/logout", login.Logout)
+	g.GET("/auth/whoami", login.WhoAmI)
 
 	// 排课
 	g.POST("/course/create", course_arrangement.CreateCourse)

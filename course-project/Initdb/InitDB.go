@@ -4,6 +4,7 @@ import (
 	"course-project/types"
 	"fmt"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm"
 )
 
 func InitDB() *gorm.DB {
@@ -14,8 +15,8 @@ func InitDB() *gorm.DB {
 	database := "course"
 	username := "root"
 	password := "12345"
-	charset := "utf8"
-	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true",
+	charset := "utf8mb4"
+	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true&loc=Local",
 		username,
 		password,
 		host,

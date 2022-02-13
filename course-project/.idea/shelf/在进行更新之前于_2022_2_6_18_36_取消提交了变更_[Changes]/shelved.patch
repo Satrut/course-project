@@ -1,0 +1,18 @@
+Index: types/router.go
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package types\r\n\r\nimport \"github.com/gin-gonic/gin\"\r\n\r\nfunc RegisterRouter(r *gin.Engine) {\r\n\tg := r.Group(\"/api/v1\")\r\n\r\n\t// 成员管理\r\n\tg.POST(\"/member/create\")\r\n\tg.GET(\"/member\")\r\n\tg.GET(\"/member/list\")\r\n\tg.POST(\"/member/update\")\r\n\tg.POST(\"/member/delete\")\r\n\r\n\t// 登录\r\n\r\n\tg.POST(\"/auth/login\")\r\n\tg.POST(\"/auth/logout\")\r\n\tg.GET(\"/auth/whoami\")\r\n\r\n\t// 排课\r\n\tg.POST(\"/course/create\")\r\n\tg.GET(\"/course/get\")\r\n\r\n\tg.POST(\"/teacher/bind_course\")\r\n\tg.POST(\"/teacher/unbind_course\")\r\n\tg.GET(\"/teacher/get_course\")\r\n\tg.POST(\"/course/schedule\")\r\n\r\n\t// 抢课\r\n\tg.POST(\"/student/book_course\")\r\n\tg.GET(\"/student/course\")\r\n\r\n}\r\n
+===================================================================
+diff --git a/types/router.go b/types/router.go
+--- a/types/router.go	
++++ b/types/router.go	
+@@ -1,6 +1,8 @@
+ package types
+ 
+-import "github.com/gin-gonic/gin"
++import (
++	"github.com/gin-gonic/gin"
++)
+ 
+ func RegisterRouter(r *gin.Engine) {
+ 	g := r.Group("/api/v1")

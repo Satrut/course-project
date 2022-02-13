@@ -1,0 +1,32 @@
+Index: type/router.go
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/type/router.go b/types/router.go
+rename from type/router.go
+rename to types/router.go
+--- a/type/router.go	
++++ b/types/router.go	
+@@ -1,4 +1,4 @@
+-package _type
++package types
+ 
+ import (
+ 	"github.com/gin-gonic/gin"
+Index: type/types.go
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/type/types.go b/types/types.go
+rename from type/types.go
+rename to types/types.go
+--- a/type/types.go	
++++ b/types/types.go	
+@@ -1,4 +1,4 @@
+-package _type
++package types
+ 
+ // 说明：
+ // 1. 所提到的「位数」均以字节长度为准
