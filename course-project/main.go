@@ -17,6 +17,15 @@ func sayHello(c *gin.Context) {
 
 func main() {
 	db := Initdb.InitDB()
+	//tmember := types.TMember{
+	//	Nickname:   "admin",
+	//	Username:   "JudgeAdmin",
+	//	Password:   "JudgePassword2022",
+	//	UserType:   types.Admin,
+	//	UserStatus: true,
+	//	UserID:     uuid.NewRandom().String(),
+	//}
+	//db.Create(&tmember)
 	defer db.Close() //延时关闭
 
 	r := gin.Default()
@@ -24,10 +33,10 @@ func main() {
 
 	// 成员管理
 	g.POST("/member/create", member.CreateMember)
-	g.GET("/member")
-	g.GET("/member/list")
+	g.GET("/member", member.GetMember)
+	g.GET("/member/list", member.GetMemberList)
 	g.POST("/member/update", member.UpdateMember)
-	g.POST("/member/delete")
+	g.POST("/member/delete", member.DeleteMember)
 
 	// 登录
 

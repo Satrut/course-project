@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Initdb/InitDB.go" beforeDir="false" afterPath="$PROJECT_DIR$/Initdb/InitDB.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" beforeDir="false" afterPath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/login.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/member/create and update member.go" beforeDir="false" afterPath="$PROJECT_DIR$/member/create and update member.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/member/member.go" beforeDir="false" afterPath="$PROJECT_DIR$/member/member.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +124,8 @@
     <MESSAGE value="dq拆分type" />
     <MESSAGE value="dq 又把type拼接了回来" />
     <MESSAGE value="dq 修改GetCourse" />
-    <option name="LAST_COMMIT_MESSAGE" value="dq 修改GetCourse" />
+    <MESSAGE value="Changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

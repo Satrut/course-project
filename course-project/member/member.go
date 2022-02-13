@@ -4,6 +4,7 @@ import (
 	"course-project/Initdb"
 	"course-project/types"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 //g.POST("/member/create")
@@ -46,7 +47,8 @@ func GetMember(c *gin.Context) {
 func GetMemberList(c *gin.Context) {
 	tmemberlist := []types.TMember{}
 	db := Initdb.InitDB()
-	if result := db.Find(&tmemberlist, "UserStatus=?", true); result.Error != nil {
+	//if result := db.Find(&tmemberlist, "UserStatus=?", true); result.Error != nil {
+	if result := db.Find(&tmemberlist, "user_status=?", true); result.Error != nil {
 		response := types.GetMemberListResponse{
 			Code: types.UserNotExisted,
 			Data: struct{ MemberList []types.TMember }{
@@ -74,7 +76,14 @@ func DeleteMember(c *gin.Context) {
 
 	// 判断UserID是否存在
 	tmember := types.TMember{}
-	tmember.UserID = c.Query("UserID")
+	//tmember.UserID = c.Query("UserID")
+	request := types.DeleteMemberRequest{}
+	err := c.BindJSON(&request)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	tmember.UserID = request.UserID
 	db := Initdb.InitDB()
 	if result := db.First(&tmember); result.Error != nil {
 		response := types.DeleteMemberResponse{
@@ -84,7 +93,8 @@ func DeleteMember(c *gin.Context) {
 		return
 	} else {
 		if tmember.UserStatus { //用户存在,删除，返回OK
-			db.Delete(tmember)
+			//db.Delete(tmember)
+			db.Model(&tmember).Update("user_status", false)
 			response := types.DeleteMemberResponse{
 				Code: types.OK,
 			}

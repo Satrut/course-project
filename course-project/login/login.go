@@ -16,11 +16,13 @@ func Login(c *gin.Context) {
 	}
 	tmember := types.TMember{Username: request.Username, Password: request.Password}
 	db := Initdb.InitDB()
-	if result := db.Where("username = ? AND password = ?", tmember.Username, tmember.Password).Find(&tmember); result.Error != nil {
+	//if result := db.First(&tmember); result.Error != nil {
+	//查找用户并判断是否已被删除
+	if result := db.Where("username = ? AND password = ?", tmember.Username, tmember.Password).Find(&tmember); result.Error != nil || tmember.UserStatus == false {
 		//登录失败
 		response := types.LoginResponse{
 			Code: types.WrongPassword,
-			Data: struct{ UserID string }{UserID: "NULL"},
+			Data: struct{ UserID string }{UserID: ""},
 		}
 		c.JSON(http.StatusOK, response)
 	} else {

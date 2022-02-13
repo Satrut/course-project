@@ -13,12 +13,12 @@ import (
 
 // CreateMember 添加成员
 func CreateMember(c *gin.Context) {
-	//权限判断
+	//登录状态及权限判断
 	campSession, err := c.Cookie("camp-session")
 	if err != nil {
-		//无cookie
+		//无cookie，需要登录
 		response := types.CreateMemberResponse{
-			Code: types.PermDenied,
+			Code: types.LoginRequired,
 			Data: struct{ UserID string }{UserID: ""},
 		}
 		c.JSON(http.StatusOK, response)
@@ -68,7 +68,7 @@ func CreateMember(c *gin.Context) {
 	tmember.Username = request.Username
 	tmember.UserType = request.UserType
 	tmember.Password = request.Password
-	tmember.UserStatus = false
+	tmember.UserStatus = true
 
 	db.Create(&tmember)
 	response := types.CreateMemberResponse{
