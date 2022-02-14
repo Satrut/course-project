@@ -8,8 +8,8 @@ import (
 )
 
 func CreateCourse(c *gin.Context) {
-	request := types.CreateCourseRequest{} //建立请求的格式（还没有数据）
-	if c.BindJSON(&request) != nil {       //将从前端获取的数据导入到request结构体中，以及如果参数不合法的处理情况
+	request := types.CreateCourseRequest{}                 //建立请求的格式（还没有数据）
+	if c.BindJSON(&request) != nil || request.Name == "" { //将从前端获取的数据导入到request结构体中，以及如果参数不合法的处理情况
 		response := types.CreateCourseResponse{
 			Code: types.ParamInvalid,
 			Data: struct{ CourseID string }{CourseID: ""},
@@ -17,21 +17,34 @@ func CreateCourse(c *gin.Context) {
 		c.JSON(200, response)
 		return
 	}
-	tcourse := types.TCourse{CourseID: uuid.NewRandom().String(), Name: request.Name, Cap: request.Cap} //对应数据库中的实体
-	db := Initdb.InitDB()                                                                               //与数据库的链接
-	db.Create(&tcourse)                                                                                 //在数据库中创建实体
-	response := types.CreateCourseResponse{                                                             //要返回给前端的数据
-		Code: types.OK,
-		Data: struct{ CourseID string }{CourseID: tcourse.CourseID},
+	tcourse := types.TCourse{Name: request.Name, Cap: request.Cap}
+	//tcourse := types.TCourse{CourseID: uuid.NewRandom().String(), Name: request.Name, Cap: request.Cap} //对应数据库中的实体
+	db := Initdb.InitDB() //与数据库的链接
+	//查找是否已创建
+	if result := db.Find(&tcourse, "name = ?", tcourse.Name); result.Error == nil {
+		//课程已创建
+		response := types.CreateCourseResponse{
+			Code: types.ParamInvalid,
+			Data: struct{ CourseID string }{CourseID: ""},
+		}
+		c.JSON(200, response)
+	} else {
+		tcourse.CourseID = uuid.NewRandom().String()
+		db.Create(&tcourse)                     //在数据库中创建实体
+		response := types.CreateCourseResponse{ //要返回给前端的数据
+			Code: types.OK,
+			Data: struct{ CourseID string }{CourseID: tcourse.CourseID},
+		}
+		c.JSON(200, response) //将数据返回
 	}
-	c.JSON(200, response) //将数据返回
 }
 
 func GetCourse(c *gin.Context) {
-	tcourse := types.TCourse{}                                                                    //对应数据库中的实体类
-	tcourse.CourseID = c.Query("CourseID")                                                        //从前端获取数据,get方法
-	db := Initdb.InitDB()                                                                         //与数据库的链接
-	if result := db.Where("course_id= ?", tcourse.CourseID).Find(&tcourse); result.Error != nil { //从数据库中进行数据查找，这是如果没有成功找到的情况
+	tcourse := types.TCourse{}             //对应数据库中的实体类
+	tcourse.CourseID = c.Query("CourseID") //从前端获取数据,get方法
+	db := Initdb.InitDB()                  //与数据库的链接
+	//if result := db.First(&tcourse); result.Error != nil { //从数据库中进行数据查找，这是如果没有成功找到的情况
+	if result := db.Find(&tcourse, "course_id = ?", tcourse.CourseID); result.Error != nil {
 		response := types.GetCourseResponse{
 			Code: types.CourseNotExisted,
 			Data: tcourse,

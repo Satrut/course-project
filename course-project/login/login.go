@@ -27,7 +27,7 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusOK, response)
 	} else {
 		//登录成功，设置cookie
-		c.SetCookie("camp-session", tmember.UserID, 3600, "/", "", false, true)
+		c.SetCookie("camp-session", tmember.UserID, 7*24*60*60, "/", "", false, true)
 		response := types.LoginResponse{
 			Code: types.OK,
 			Data: struct{ UserID string }{UserID: tmember.UserID},
