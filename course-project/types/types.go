@@ -48,6 +48,11 @@ type TCourse struct {
 	TeacherID string
 }
 
+type BookCourse struct {
+	StudentID string
+	CourseID  string
+}
+
 // -----------------------------------
 
 // 成员管理

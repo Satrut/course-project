@@ -1,6 +1,7 @@
 package course_arrangement
 
 import (
+	"course-project/InitRedis"
 	"course-project/Initdb"
 	"course-project/types"
 	"github.com/gin-gonic/gin"
@@ -30,7 +31,8 @@ func CreateCourse(c *gin.Context) {
 		c.JSON(200, response)
 	} else {
 		tcourse.CourseID = uuid.NewRandom().String()
-		db.Create(&tcourse)                     //在数据库中创建实体
+		db.Create(&tcourse) //在数据库中创建实体
+		InitRedis.SetForever(tcourse.CourseID, tcourse.Cap)
 		response := types.CreateCourseResponse{ //要返回给前端的数据
 			Code: types.OK,
 			Data: struct{ CourseID string }{CourseID: tcourse.CourseID},

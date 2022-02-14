@@ -1,6 +1,7 @@
 package main
 
 import (
+	"course-project/InitRedis"
 	"course-project/Initdb"
 	"course-project/course_arrangement"
 	"course-project/login"
@@ -16,6 +17,7 @@ func sayHello(c *gin.Context) {
 }
 
 func main() {
+	InitRedis.InitRedisConnection()
 	db := Initdb.InitDB()
 	//tmember := types.TMember{
 	//	Nickname:   "admin",
@@ -54,9 +56,13 @@ func main() {
 	g.POST("/course/schedule", course_arrangement.ScheduleCourse)
 
 	// 抢课
-	g.POST("/student/book_course")
+	g.POST("/student/book_course", course_arrangement.BookCourse)
 	g.GET("/student/course")
+
+	//启动消费者
+	course_arrangement.RunSpikeCourseConsumer()
 
 	//r.Run()
 	panic(r.Run()) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
 }

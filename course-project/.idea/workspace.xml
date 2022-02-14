@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq 排课求解器">
+    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq">
+      <change afterPath="$PROJECT_DIR$/InitRedis/InitRedis.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InitRedis/Script.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/course_arrangement/SpikeCourseConsumer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/course_arrangement/course.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Initdb/InitDB.go" beforeDir="false" afterPath="$PROJECT_DIR$/Initdb/InitDB.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" beforeDir="false" afterPath="$PROJECT_DIR$/course_arrangement/course_arrangement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/types/types.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +57,7 @@
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Initdb" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -120,7 +129,8 @@
     <MESSAGE value="dq 修改GetCourse" />
     <MESSAGE value="dq 课程相关接口" />
     <MESSAGE value="dq 排课求解器" />
-    <option name="LAST_COMMIT_MESSAGE" value="dq 排课求解器" />
+    <MESSAGE value="dq" />
+    <option name="LAST_COMMIT_MESSAGE" value="dq" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -129,6 +139,7 @@
     <watches-manager>
       <configuration name="GoApplicationRunConfiguration">
         <watch expression="tcourse" />
+        <watch expression="BookCourseRes" />
       </configuration>
     </watches-manager>
   </component>

@@ -33,6 +33,7 @@ func InitDB() *gorm.DB {
 	//自动创建数据表
 	DB.AutoMigrate(&types.TMember{})
 	DB.AutoMigrate(&types.TCourse{})
+	DB.AutoMigrate(&types.BookCourse{})
 
 	return DB
 }
