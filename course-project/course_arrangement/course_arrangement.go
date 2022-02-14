@@ -28,10 +28,10 @@ func CreateCourse(c *gin.Context) {
 }
 
 func GetCourse(c *gin.Context) {
-	tcourse := types.TCourse{}                             //对应数据库中的实体类
-	tcourse.CourseID = c.Query("CourseID")                 //从前端获取数据,get方法
-	db := Initdb.InitDB()                                  //与数据库的链接
-	if result := db.First(&tcourse); result.Error != nil { //从数据库中进行数据查找，这是如果没有成功找到的情况
+	tcourse := types.TCourse{}                                                                    //对应数据库中的实体类
+	tcourse.CourseID = c.Query("CourseID")                                                        //从前端获取数据,get方法
+	db := Initdb.InitDB()                                                                         //与数据库的链接
+	if result := db.Where("course_id= ?", tcourse.CourseID).Find(&tcourse); result.Error != nil { //从数据库中进行数据查找，这是如果没有成功找到的情况
 		response := types.GetCourseResponse{
 			Code: types.CourseNotExisted,
 			Data: tcourse,
@@ -57,7 +57,7 @@ func BindCourse(c *gin.Context) {
 	}
 	tcourse := types.TCourse{CourseID: request.CourseID}
 	db := Initdb.InitDB()
-	if result := db.First(&tcourse); result.Error != nil { //如果课程不存在
+	if result := db.Where("course_id= ?", tcourse.CourseID).Find(&tcourse); result.Error != nil { //如果课程不存在
 		response := types.BindCourseResponse{
 			Code: types.CourseNotExisted,
 		}
@@ -89,7 +89,7 @@ func UnbindCourse(c *gin.Context) {
 	}
 	tcourse := types.TCourse{CourseID: request.CourseID}
 	db := Initdb.InitDB()
-	if result := db.First(&tcourse); result.Error != nil { //如果课程不存在
+	if result := db.Where("course_id= ?", tcourse.CourseID).Find(&tcourse); result.Error != nil { //如果课程不存在
 		response := types.UnbindCourseResponse{
 			Code: types.CourseNotExisted,
 		}
@@ -97,7 +97,7 @@ func UnbindCourse(c *gin.Context) {
 		return
 	} else if tcourse.TeacherID != "" && tcourse.TeacherID != request.TeacherID { //如果课程已经被绑定过
 		response := types.UnbindCourseResponse{
-			Code: types.CourseHasBound,
+			Code: types.UnknownError,
 		}
 		c.JSON(200, response)
 		return
