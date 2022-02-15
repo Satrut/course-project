@@ -57,7 +57,7 @@ func main() {
 
 	// 抢课
 	g.POST("/student/book_course", course_arrangement.BookCourse)
-	g.GET("/student/course")
+	g.GET("/student/course", course_arrangement.GetStudentCourse)
 
 	//启动消费者
 	course_arrangement.RunSpikeCourseConsumer()

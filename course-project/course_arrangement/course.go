@@ -2,6 +2,7 @@ package course_arrangement
 
 import (
 	"course-project/InitRedis"
+	"course-project/Initdb"
 	"course-project/types"
 	"github.com/gin-gonic/gin"
 )
@@ -69,4 +70,33 @@ func BookCourse(c *gin.Context) {
 			return
 		}
 	}
+}
+
+func GetStudentCourse(c *gin.Context) {
+	StudentID := c.Query("StudentID")
+	db := Initdb.InitDB()
+	tmember := types.TMember{}
+	var tcourses []types.TCourse
+	if result := db.Find(&tmember, "user_id = ?", StudentID); result.Error != nil || tmember.UserType != 2 {
+		response := types.GetStudentCourseResponse{
+			Code: types.StudentNotExisted,
+			Data: struct{ CourseList []types.TCourse }{CourseList: tcourses},
+		}
+		c.JSON(200, response)
+		return
+	}
+	var courseID []types.BookCourse
+	db.Where(`student_id = ?`, StudentID).Find(&courseID)
+	tcoursess := make([]types.TCourse, len(courseID))
+	x := 0
+	for _, v := range courseID {
+		db.Where("course_id = ?", v.CourseID).Find(&tcoursess[x])
+		x += 1
+	}
+	response := types.GetStudentCourseResponse{
+		Code: types.OK,
+		Data: struct{ CourseList []types.TCourse }{CourseList: tcoursess},
+	}
+	c.JSON(200, response)
+	return
 }
