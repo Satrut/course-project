@@ -6,16 +6,16 @@ import (
 
 var client *redis.Client = redis.NewClient(&redis.Options{
 	Addr:     "127.0.0.1:6379",
-	Password: "", // It's ok if password is "".
-	DB:       0,  // use default DB
+	Password: "12345", // It's ok if password is "".
+	DB:       0,       // use default DB
 })
 
 // 开启redis连接池
 func InitRedisConnection() {
 	client = redis.NewClient(&redis.Options{
 		Addr:     "127.0.0.1:6379",
-		Password: "", // It's ok if password is "".
-		DB:       0,  // use default DB
+		Password: "12345", // It's ok if password is "".
+		DB:       0,       // use default DB
 	})
 
 	if _, err := FlushAll(); err != nil {

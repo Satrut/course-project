@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq 抢课">
+    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq 查看个人课表">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course_arrangement/course.go" beforeDir="false" afterPath="$PROJECT_DIR$/course_arrangement/course.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InitRedis/InitRedis.go" beforeDir="false" afterPath="$PROJECT_DIR$/InitRedis/InitRedis.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +122,8 @@
     <MESSAGE value="dq 排课求解器" />
     <MESSAGE value="dq" />
     <MESSAGE value="dq 抢课" />
-    <option name="LAST_COMMIT_MESSAGE" value="dq 抢课" />
+    <MESSAGE value="dq 查看个人课表" />
+    <option name="LAST_COMMIT_MESSAGE" value="dq 查看个人课表" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
