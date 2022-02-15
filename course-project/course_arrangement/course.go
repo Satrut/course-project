@@ -11,7 +11,7 @@ func BookCourse(c *gin.Context) {
 	request := types.BookCourseRequest{}
 	if c.BindJSON(&request) != nil || request.StudentID == "" || request.CourseID == "" { //如果参数不合法
 		response := types.BookCourseResponse{
-			Code: 33,
+			Code: types.UnknownError,
 		}
 		c.JSON(200, response)
 		return
@@ -20,7 +20,7 @@ func BookCourse(c *gin.Context) {
 	res, err := InitRedis.EvalSHA(InitRedis.SpikeCourseSHA, []string{request.StudentID, request.CourseID})
 	if err != nil {
 		response := types.BookCourseResponse{
-			Code: 33,
+			Code: types.UnknownError,
 		}
 		c.JSON(200, response)
 		return
@@ -30,7 +30,7 @@ func BookCourse(c *gin.Context) {
 	BookCourseRes, ok := res.(int64)
 	if !ok {
 		response := types.BookCourseResponse{
-			Code: 33,
+			Code: types.UnknownError,
 		}
 		c.JSON(200, response)
 		return
@@ -64,7 +64,7 @@ func BookCourse(c *gin.Context) {
 	default:
 		{
 			response := types.BookCourseResponse{
-				Code: 33,
+				Code: types.UnknownError,
 			}
 			c.JSON(200, response)
 			return
