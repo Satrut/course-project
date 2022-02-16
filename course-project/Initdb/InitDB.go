@@ -1,7 +1,6 @@
 package Initdb
 
 import (
-	"course-project/types"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm"
@@ -14,7 +13,7 @@ func InitDB() *gorm.DB {
 	port := "3306"
 	database := "course"
 	username := "root"
-	password := "12345"
+	password := "bytedancecamp"
 	charset := "utf8mb4"
 	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true&loc=Local",
 		username,
@@ -25,15 +24,10 @@ func InitDB() *gorm.DB {
 		charset,
 	)
 
-	DB, err := gorm.Open(driverName, args)
+	db, err := gorm.Open(driverName, args)
 	if err != nil {
 		panic("failed to connect database,err:" + err.Error())
 	}
 
-	//自动创建数据表
-	DB.AutoMigrate(&types.TMember{})
-	DB.AutoMigrate(&types.TCourse{})
-	DB.AutoMigrate(&types.BookCourse{})
-
-	return DB
+	return db
 }

@@ -26,8 +26,9 @@ func CreateMember(c *gin.Context) {
 	} else {
 		tmember := types.TMember{}
 		db := Initdb.InitDB()
+		defer db.Close() //延时关闭
 		db.Where("user_id = ?", campSession).Find(&tmember)
-		if tmember.UserType != 1 {
+		if tmember.UserType != types.Admin {
 			//无权限
 			response := types.CreateMemberResponse{
 				Code: types.PermDenied,
@@ -53,6 +54,7 @@ func CreateMember(c *gin.Context) {
 	//tmember.Username = c.Query("Username")
 	tmember.Username = request.Username
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
 	if result := db.Where("username = ?", tmember.Username).Find(&tmember); result.Error == nil {
 		response := types.CreateMemberResponse{
 			Code: types.UserHasExisted,
@@ -128,6 +130,7 @@ func UpdateMember(c *gin.Context) {
 	//tmember.UserID = c.Query("UserID")
 	tmember.UserID = request.UserID
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
 	if result := db.Where("user_id = ?", tmember.UserID).Find(&tmember); result.Error != nil {
 		response := types.UpdateMemberResponse{
 			Code: types.UserNotExisted,

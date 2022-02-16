@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq 修改redis密码为12345">
+    <list default="true" id="17db3387-e695-41f3-9733-041f718423a9" name="Changes" comment="dq">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course_arrangement/course.go" beforeDir="false" afterPath="$PROJECT_DIR$/course_arrangement/course.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +23,14 @@
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
@@ -49,6 +56,7 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -92,11 +100,6 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Go Build.go build course-project" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,11 +123,11 @@
     <MESSAGE value="dq 修改GetCourse" />
     <MESSAGE value="dq 课程相关接口" />
     <MESSAGE value="dq 排课求解器" />
-    <MESSAGE value="dq" />
     <MESSAGE value="dq 抢课" />
     <MESSAGE value="dq 查看个人课表" />
     <MESSAGE value="dq 修改redis密码为12345" />
-    <option name="LAST_COMMIT_MESSAGE" value="dq 修改redis密码为12345" />
+    <MESSAGE value="dq" />
+    <option name="LAST_COMMIT_MESSAGE" value="dq" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

@@ -20,6 +20,7 @@ func GetMember(c *gin.Context) {
 	tmember := types.TMember{}
 	tmember.UserID = c.Query("UserID")
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
 	if result := db.First(&tmember); result.Error != nil { //用户不存在
 		response := types.GetMemberResponse{
 			Code: types.UserNotExisted,
@@ -51,6 +52,7 @@ func GetMemberList(c *gin.Context) {
 	request.Limit, _ = strconv.Atoi(c.Query("Limit"))
 	tmemberlist := []types.TMember{}
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
 	//if result := db.Find(&tmemberlist, "UserStatus=?", true); result.Error != nil {
 	if result := db.Offset(request.Offset).Limit(request.Limit).Find(&tmemberlist, "user_status=?", true); result.Error != nil {
 		response := types.GetMemberListResponse{
@@ -89,6 +91,7 @@ func DeleteMember(c *gin.Context) {
 	}
 	tmember.UserID = request.UserID
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
 	if result := db.First(&tmember); result.Error != nil {
 		response := types.DeleteMemberResponse{
 			Code: types.UserNotExisted,

@@ -21,6 +21,7 @@ func CreateCourse(c *gin.Context) {
 	tcourse := types.TCourse{Name: request.Name, Cap: request.Cap}
 	//tcourse := types.TCourse{CourseID: uuid.NewRandom().String(), Name: request.Name, Cap: request.Cap} //对应数据库中的实体
 	db := Initdb.InitDB() //与数据库的链接
+	defer db.Close()      //延时关闭
 	//查找是否已创建
 	if result := db.Find(&tcourse, "name = ?", tcourse.Name); result.Error == nil {
 		//课程已创建
@@ -45,6 +46,7 @@ func GetCourse(c *gin.Context) {
 	tcourse := types.TCourse{}             //对应数据库中的实体类
 	tcourse.CourseID = c.Query("CourseID") //从前端获取数据,get方法
 	db := Initdb.InitDB()                  //与数据库的链接
+	defer db.Close()                       //延时关闭
 	//if result := db.First(&tcourse); result.Error != nil { //从数据库中进行数据查找，这是如果没有成功找到的情况
 	if result := db.Find(&tcourse, "course_id = ?", tcourse.CourseID); result.Error != nil {
 		response := types.GetCourseResponse{
@@ -72,6 +74,7 @@ func BindCourse(c *gin.Context) {
 	}
 	tcourse := types.TCourse{CourseID: request.CourseID}
 	db := Initdb.InitDB()
+	defer db.Close()                                                                              //延时关闭
 	if result := db.Where("course_id= ?", tcourse.CourseID).Find(&tcourse); result.Error != nil { //如果课程不存在
 		response := types.BindCourseResponse{
 			Code: types.CourseNotExisted,
@@ -104,6 +107,7 @@ func UnbindCourse(c *gin.Context) {
 	}
 	tcourse := types.TCourse{CourseID: request.CourseID}
 	db := Initdb.InitDB()
+	defer db.Close()                                                                              //延时关闭
 	if result := db.Where("course_id= ?", tcourse.CourseID).Find(&tcourse); result.Error != nil { //如果课程不存在
 		response := types.UnbindCourseResponse{
 			Code: types.CourseNotExisted,
@@ -142,6 +146,7 @@ func GetTeacherCourse(c *gin.Context) {
 		return
 	}
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
 	db.Where(`teacher_id = ?`, teacher_id).Find(&tcourses)
 	response := types.GetTeacherCourseResponse{
 		Code: types.OK,

@@ -16,6 +16,7 @@ func Login(c *gin.Context) {
 	}
 	tmember := types.TMember{Username: request.Username, Password: request.Password}
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
 	//if result := db.First(&tmember); result.Error != nil {
 	//查找用户并判断是否已被删除
 	if result := db.Where("username = ? AND password = ?", tmember.Username, tmember.Password).Find(&tmember); result.Error != nil || tmember.UserStatus == false {
@@ -55,6 +56,7 @@ func WhoAmI(c *gin.Context) {
 		c.JSON(http.StatusOK, response)
 	} else {
 		db := Initdb.InitDB()
+		defer db.Close() //延时关闭
 		db.Where("user_id = ?", campSession).Find(&tmember)
 		response := types.WhoAmIResponse{
 			Code: types.OK,

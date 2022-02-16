@@ -75,6 +75,7 @@ func BookCourse(c *gin.Context) {
 func GetStudentCourse(c *gin.Context) {
 	StudentID := c.Query("StudentID")
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
 	tmember := types.TMember{}
 	var tcourses []types.TCourse
 	if result := db.Find(&tmember, "user_id = ?", StudentID); result.Error != nil || tmember.UserType != 2 {
@@ -93,8 +94,14 @@ func GetStudentCourse(c *gin.Context) {
 		db.Where("course_id = ?", v.CourseID).Find(&tcoursess[x])
 		x += 1
 	}
+	var res_code types.ErrNo
+	if len(tcoursess) > 0 {
+		res_code = types.OK
+	} else {
+		res_code = types.StudentHasNoCourse
+	}
 	response := types.GetStudentCourseResponse{
-		Code: types.OK,
+		Code: res_code,
 		Data: struct{ CourseList []types.TCourse }{CourseList: tcoursess},
 	}
 	c.JSON(200, response)

@@ -6,19 +6,19 @@ import (
 	"course-project/course_arrangement"
 	"course-project/login"
 	"course-project/member"
+	"course-project/types"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-func sayHello(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "Hello golang!",
-	})
-}
-
 func main() {
 	InitRedis.InitRedisConnection()
 	db := Initdb.InitDB()
+	defer db.Close() //延时关闭
+	//自动创建数据表
+	db.AutoMigrate(&types.TMember{})
+	db.AutoMigrate(&types.TCourse{})
+	db.AutoMigrate(&types.BookCourse{})
 	//tmember := types.TMember{
 	//	Nickname:   "admin",
 	//	Username:   "JudgeAdmin",
@@ -28,7 +28,6 @@ func main() {
 	//	UserID:     uuid.NewRandom().String(),
 	//}
 	//db.Create(&tmember)
-	defer db.Close() //延时关闭
 
 	r := gin.Default()
 	g := r.Group("/api/v1")
@@ -63,6 +62,6 @@ func main() {
 	course_arrangement.RunSpikeCourseConsumer()
 
 	//r.Run()
-	panic(r.Run()) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	panic(r.Run(":80")) // listen and serve on 0.0.0.0:80 (for windows "localhost:80")
 
 }

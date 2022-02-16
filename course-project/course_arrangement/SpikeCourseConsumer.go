@@ -24,6 +24,7 @@ func SpikeCourseConsumer() {
 		message := <-SpikeCourseChannel
 		bookCourse := types.BookCourse{StudentID: message.StudentID, CourseID: message.CourseID}
 		db := Initdb.InitDB() //与数据库的链接
+		defer db.Close()      //延时关闭
 		db.Create(&bookCourse)
 	}
 }
